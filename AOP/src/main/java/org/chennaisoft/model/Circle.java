@@ -4,11 +4,14 @@ public class Circle {
 	private String name;
 
 	public String getName() {
-		return name;
+		return getMyName();
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	protected String getMyName() {
+		return "surendra";
+	}
 }

@@ -4,6 +4,8 @@
 package com.chennaisoft.aspect;
 
 import org.apache.log4j.Logger;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -23,9 +25,9 @@ public class LoggingAspect {
 		log.debug("Advice run. Get Method Called...");
 	}
 
-	@Before("allCircleMethods()")
+	@Before("allMethodsInModel()")
 	public void loggingAdvice2() {
-		log.debug("Advice run. allCircleMethods...");
+		log.debug("Advice run. all methods in model...");
 	}
 
 	// @Before("allGetters()")
@@ -41,8 +43,18 @@ public class LoggingAspect {
 	public void forCircleMethods() {
 	}
 
-	@Pointcut("within(org.chennaisoft.model.Circle)")
-	public void allCircleMethods() {
+	@Pointcut("within(org.chennaisoft.model..*)")
+	public void allMethodsInModel() {
+	}
+	@Around("allMethodsInModel()")
+	public void aroundAdvice(ProceedingJoinPoint point) throws Throwable {
+		long start = System.currentTimeMillis();
+		point.proceed();
+		long end = System.currentTimeMillis();
+		
+		System.out.println(point.getThis() + "time taken for this method..."+ (end-start));
+		
+		
 	}
 
 }

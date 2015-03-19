@@ -21,4 +21,7 @@
 	<bean name="shapeService" class="org.chennaisoft.service.ShapeService"
 		autowire="byName"></bean>
 	<bean name="loggingAspect" class="com.chennaisoft.aspect.LoggingAspect"></bean>
+	
+	<bean name="usageTracking" class="org.chennaisoft.intro.UsageTrackingImpl" />
+	
 </beans>
